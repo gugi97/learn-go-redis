@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-db
+    ports:
+      - "6379:6379" # Map host port 6379 to container port 6379
+
+  postgres:
+    image: postgres:12.8
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5432:5432" # Map host port 5432 to container port 5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: learn
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
